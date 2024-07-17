@@ -70,58 +70,80 @@ const onInput = (event) => {
 </script>
 
 <template>
-  <form class="payment-form" @submit.prevent="submit">
-    <div class="payment-form__row">
-      <input
-          class="payment-form__control"
-          :class="{'is-invalid': isInvalid}"
-          :value="formattedValue"
-          @input="onInput"
-          placeholder="xxxx xxxx xxxx xxxx"
-          inputmode="numeric"
-          name="cc-number"
-          autocomplete="cc-number"
-          type="text"
-      />
-      <div v-if="isInvalid" class="error-message">{{ errorMessage }}</div>
-    </div>
-    <div class="payment-form__row-multi">
-      <input class="payment-form__control" v-model="month" placeholder="MM" />
-      <input class="payment-form__control" v-model="year" placeholder="YY" />
-      <input class="payment-form__control" v-model="cvv" placeholder="CVV2/CVC2" />
-    </div>
-    <label>
-      <input type="checkbox" />
-      Guarantee of fast return of funds
-    </label>
-    <a href="#">(public policy)</a>
-    <button type="submit">PAY</button>
-  </form>
+  <div class="payment-form">
+    <form class="payment-form__form" @submit.prevent="submit">
+      <div class="payment-form__row-first">
+        <input
+            class="payment-form__control"
+            :class="{'is-invalid': isInvalid}"
+            :value="formattedValue"
+            @input="onInput"
+            placeholder="xxxx xxxx xxxx xxxx"
+            inputmode="numeric"
+            name="cc-number"
+            autocomplete="cc-number"
+            type="text"
+        />
+        <div v-if="isInvalid" class="error-message">{{ errorMessage }}</div>
+      </div>
+      <div class="payment-form__row">
+        <div class="payment-form__row-multi">
+          <input class="payment-form__control" v-model="month" placeholder="MM" />
+          <input class="payment-form__control" v-model="year" placeholder="YY" />
+        </div>
+        <div class="payment-form__row-last">
+          <input class="payment-form__control" v-model="cvv" placeholder="CVV2/CVC2" />
+        </div>
+      </div>
+      <label>
+        <input type="checkbox" />
+        Guarantee of fast return of funds
+      </label>
+      <a href="#">(public policy)</a>
+      <button type="submit">PAY</button>
+    </form>
+  </div>
 </template>
 
 <style scoped>
 .payment-form {
-  width: 100%;
-  max-width: 596px;
-  padding: 10px;
+  margin-bottom: 30px;
+  padding: 20px 42px 0;
+}
+.payment-form__form {
+  padding: 40px;
   border-radius: 15px;
   background-color: #fff;
   box-shadow: 0 12px 29px rgba(0, 0, 0, 0.12);
+  width: 100%;
+  min-width: 320px;
+  max-width: 425px;
+  box-sizing: border-box;
 }
-.payment-form__row {
+.payment-form__row-first {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
 }
-.payment-form__row-multi {
+.payment-form__row {
   display: flex;
-  justify-content: flex-start;
+  justify-content: stretch;
   align-items: center;
   flex-wrap: wrap;
 }
+.payment-form__row-multi {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .payment-form__row-multi .payment-form__control {
   max-width: 48%;
+  margin-bottom: 20px;
+}
+.payment-form__row-last {
+  width: 100%;
+  margin-bottom: 35px;
 }
 .payment-form__control {
   position: relative;
@@ -135,6 +157,8 @@ const onInput = (event) => {
   border: 1px solid transparent;
   text-align: center;
   appearance: none;
+  width: 100%;
+  box-sizing: border-box;
 }
 .payment-form__control:hover {
   border-color: #777777;
@@ -144,9 +168,8 @@ const onInput = (event) => {
   margin-top: 4px;
 }
 @media only screen and (min-width: 950px) {
-  .payment-form {
+  .payment-form__form {
     max-width: 425px;
-    padding: 40px;
   }
 }
 </style>
