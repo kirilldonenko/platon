@@ -39,7 +39,7 @@ import Prostir from '@/assets/images/prostir.svg'
 .payment-cards__row {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   height: 60px;
   background-color: #f5f5f5;
   transition: 0.2s ease;
@@ -63,11 +63,11 @@ import Prostir from '@/assets/images/prostir.svg'
   outline: none;
 }
 .payments__btn {
+  position: relative;
   width: 64px;
   height: 62px;
   background-color: #f26424;
   border: none;
-  display: none;
 }
 .payments__btn::after {
   position: absolute;

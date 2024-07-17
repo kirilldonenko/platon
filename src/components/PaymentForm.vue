@@ -32,7 +32,7 @@ const submit = () => {
 
 <style scoped>
 .form {
-  padding: 40px;
+  padding: 10px;
   border-radius: 15px;
   background-color: #fff;
   box-shadow: 0 12px 29px rgba(0, 0, 0, 0.12);

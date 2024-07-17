@@ -38,4 +38,9 @@ import UA from '@/assets/images/ua.svg'
     display: none;
   }
 }
+@media only screen and (min-width: 768px) {
+  .lang-switcher {
+    flex-direction: row;
+  }
+}
 </style>

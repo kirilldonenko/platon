@@ -26,7 +26,16 @@ import PaymentDetails from "@/components/PaymentDetails.vue";
   box-shadow: 0 23px 79px rgba(0, 0, 0, 0.16);
 }
 .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   margin: 0 auto;
   padding: 0 10px;
+}
+@media only screen and (min-width: 950px) {
+  .container {
+    flex-direction: row;
+  }
 }
 </style>
