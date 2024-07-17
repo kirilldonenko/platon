@@ -90,4 +90,9 @@ import Prostir from '@/assets/images/prostir.svg'
   width: 1px;
   background-color: #ffbd95;
 }
+@media only screen and (min-width: 948px) {
+  .payments__btn {
+    display: none;
+  }
+}
 </style>
