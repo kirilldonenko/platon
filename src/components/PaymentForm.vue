@@ -1,16 +1,18 @@
 <script setup>
-import { ref, watch } from 'vue';
+import { nextTick, onMounted, ref, watch } from 'vue';
 import Warning from '@/assets/images/warning.svg'
+import Inputmask from 'inputmask';
 
-const cardNumber = ref(null);
-const month = ref(null);
-const year = ref(null);
-const cvv = ref(null);
-const formattedValue = ref('');
+const cardNumber = ref('');
+const month = ref('');
+const year = ref('');
+const cvv = ref('');
+const formattedCardNumber = ref('xxxx xxxx xxxx xxxx');
 const isCardNumberInvalid = ref(false);
 const isMonthInvalid = ref(false);
 const isYearInvalid = ref(false);
 const isCvvInvalid = ref(false);
+const inputRef = ref(null);
 const submit = () => {
   console.log('Card Number:', cardNumber.value);
   console.log('Month:', month.value);
@@ -18,28 +20,17 @@ const submit = () => {
   console.log('CVV:', cvv.value);
 }
 
-const formatCardNumber = (value) => {
-  let rawValue = value?.replace(/\D/g, '') || '';
-  let result = '';
-  for (let i = 0; i < 16; i++) {
-    if (i < rawValue.length) {
-      result += rawValue[i];
-    } else {
-      result += 'x';
-    }
-    if ((i + 1) % 4 === 0 && i < 15) {
-      result += ' ';
-    }
-  }
-  return result;
-};
+const updateCardNumber = (event) => {
+  const value = event.target.value;
+  formattedCardNumber.value = value;
+  cardNumber.value = value.replace(/\s/g, '');
+}
 
-const validateCardNumber = (value) => {
-  isCardNumberInvalid.value = value?.length !== 16;
+const validateCardNumber = () => {
+  isCardNumberInvalid.value = cardNumber.value.replace(/x/g, '').length !== 16;
 };
 const validateMonth = (value) => {
   if (value < 1 || value > 12 || value?.length !== 2) {
-    console.log('value',value)
     isMonthInvalid.value = true;
   } else {
     isMonthInvalid.value = false;
@@ -66,13 +57,15 @@ const onMonthInput = (event) => {
   let value = event.target.value.replace(/\D/g, '');
 
   if (value.length > 2) {
+    month.value = value.slice(0, 2);
     return;
   }
-
   if (value > 12) {
     value = '12';
   } else if (value <= 0 && value.length === 2) {
     value = '01';
+  } else if (value > 0 && value < 10) {
+    value = value.padStart(2, 0)
   }
 
   month.value = value;
@@ -85,6 +78,10 @@ const onYearInput = (event) => {
   let value = event.target.value?.replace(/\D/g, '') || '';
   if (value < 24 && value?.length === 2) {
     value = '24';
+  }
+  if (value.length > 2) {
+    year.value = value.slice(0, 2);
+    return;
   }
   year.value = value;
 };
@@ -99,19 +96,24 @@ const onCvvBlur = () => {
   validateCvv(cvv.value);
 };
 const onBlurCardNumber = () => {
-  validateCardNumber(cardNumber.value);
+  validateCardNumber();
 };
 
-const onInput = (event) => {
-  const rawValue = event.target.value.replace(/\D/g, '');
-  if (rawValue !== event.target.value.replace(/ /g, '')) {
-    isCardNumberInvalid.value = true;
-  } else {
-    cardNumber.value = rawValue;
-    formattedValue.value = formatCardNumber(rawValue);
-    validateCardNumber(rawValue);
-  }
-};
+onMounted(() => {
+  nextTick(() => {
+    const inputmask = new Inputmask({
+      mask: '9999 9999 9999 9999',
+      placeholder: 'x',
+      oncomplete: () => {
+        cardNumber.value = formattedCardNumber.value.replace(/\s/g, '');
+      },
+      onincomplete: () => {
+        cardNumber.value = formattedCardNumber.value.replace(/\s/g, '');
+      },
+    });
+    inputmask.mask(inputRef.value);
+  });
+});
 </script>
 
 <template>
@@ -133,14 +135,15 @@ const onInput = (event) => {
         <div class="payment-form__item">
           <input
               class="payment-form__control"
-              :value="formattedValue"
-              @input="onInput"
-              @blur="onBlurCardNumber"
+              v-model="formattedCardNumber"
+              @input="updateCardNumber"
               placeholder="xxxx xxxx xxxx xxxx"
+              ref="inputRef"
+              @blur="onBlurCardNumber"
               inputmode="numeric"
               name="cc-number"
               autocomplete="cc-number"
-              type="number"
+              type="text"
           />
           <div class="payment-form__icon" title="Enter the card number (16 digits)">
             <svg width="19" height="19" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
