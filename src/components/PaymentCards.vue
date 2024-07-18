@@ -2,11 +2,21 @@
 import Visa from '@/assets/images/visa.svg'
 import MasterCard from '@/assets/images/master-card.svg'
 import Prostir from '@/assets/images/prostir.svg'
+import GooglePay from '@/assets/images/googlePay.svg'
+import ApplePay from '@/assets/images/applePay.svg'
+import MonobankLogo from '@/assets/images/monobank-logo.png'
+import Monobank from '@/assets/images/monobank.png'
+import PrivatLogo from '@/assets/images/privat-logo.png'
+import Privat24 from '@/assets/images/privat24.svg'
+import Oschadbank from '@/assets/images/oschadbank.png'
+import VerifyVisa from '@/assets/images/verify-visa.png'
+import MasterCardSecure from '@/assets/images/master-card.png'
+import PCI from '@/assets/images/pci.png'
 </script>
 
 <template>
  <div class="payment-cards" >
-  <div class="payment-cards__row payment-cards__row--active">
+   <div class="payment-cards__row payment-cards__row--active">
     <div class="payment-cards__block">
       <div  class="payment-cards__card">
         <img :src="Visa" alt="Visa" width="70" height="25">
@@ -20,13 +30,46 @@ import Prostir from '@/assets/images/prostir.svg'
     </div>
     <button class="payments__btn"/>
   </div>
+   <div class="payment-cards__row payment-cards__row--inactive">
+     <div  class="payment-cards__card">
+       <img :src="GooglePay" alt="GooglePay" width="72" height="29">
+     </div>
+     <div  class="payment-cards__card">
+       <img :src="ApplePay" alt="ApplePay" width="75" height="30" class="grayscale">
+     </div>
+   </div>
+   <div class="payment-cards__row payment-cards__row--inactive">
+     <div  class="payment-cards__card">
+       <img :src="MonobankLogo" alt="MonobankLogo" width="26" height="26" class="grayscale monobank-logo">
+       <img :src="Monobank" alt="Monobank" width="104" height="16" class="grayscale">
+     </div>
+     <div  class="payment-cards__card">
+       <img :src="PrivatLogo" alt="PrivatLogo" width="118" height="32" class="grayscale">
+     </div>
+   </div>
+   <div class="payment-cards__row payment-cards__row--inactive">
+     <div  class="payment-cards__card">
+       <img :src="Privat24" alt="Privat24" width="126" height="29" class="grayscale">
+     </div>
+     <div  class="payment-cards__card">
+       <img :src="Oschadbank" alt="Oschadbank" width="135" height="52" class="grayscale">
+     </div>
+   </div>
+   <div class="payment-cards__row payment-cards__row--inactive payment-cards__row--inactive-last">
+     <div  class="payment-cards__card">
+       <img :src="VerifyVisa" alt="VerifyVisa" width="83" height="36" class="grayscale">
+     </div>
+     <div  class="payment-cards__card">
+       <img :src="MasterCardSecure" alt="MasterCardSecure" width="118" height="36" class="grayscale">
+     </div>
+     <div  class="payment-cards__card">
+       <img :src="PCI" alt="PSI" width="42" height="36" class="grayscale">
+     </div>
+   </div>
 </div>
 </template>
 
 <style scoped>
-.payment-cards__row--active {
-
-}
 .payment-cards__block {
   width: calc(100% - 70px);
   display: flex;
@@ -47,8 +90,23 @@ import Prostir from '@/assets/images/prostir.svg'
   width: 100%;
   outline: none;
 }
+.payment-cards__row--inactive {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
 .payment-cards__row--active .payment-cards__card {
   max-width: 33%;
+}
+.payment-cards__row--inactive .payment-cards__card::before {
+  display: none;
+}
+.payment-cards__row--inactive .payment-cards__card {
+  background-color: #f5f5f5;
+}
+.payment-cards__row--inactive .payment-cards__card:first-child {
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+.payment-cards__row--inactive-last, .payment-cards__row--inactive-last .payment-cards__card:first-child {
+  border: none;
 }
 .payment-cards__card {
   position: relative;
@@ -90,7 +148,23 @@ import Prostir from '@/assets/images/prostir.svg'
   width: 1px;
   background-color: #ffbd95;
 }
+.payment-cards__card:first-child::before {
+  display: none;
+}
+.monobank-logo {
+  margin-right: 10px;
+}
+.grayscale {
+  opacity: 0.6;
+  filter: grayscale(100%);
+}
 @media only screen and (min-width: 948px) {
+  .payment-cards__block {
+    width: 100%;
+  }
+  .payment-cards__card {
+    background-color: #ffffff;
+  }
   .payments__btn {
     display: none;
   }

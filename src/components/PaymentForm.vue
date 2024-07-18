@@ -7,6 +7,7 @@ const cardNumber = ref('');
 const month = ref('');
 const year = ref('');
 const cvv = ref('');
+const check = ref(false);
 const formattedCardNumber = ref('xxxx xxxx xxxx xxxx');
 const isCardNumberInvalid = ref(false);
 const isMonthInvalid = ref(false);
@@ -14,10 +15,15 @@ const isYearInvalid = ref(false);
 const isCvvInvalid = ref(false);
 const inputRef = ref(null);
 const submit = () => {
+  validateCardNumber()
+  validateMonth()
+  validateYear()
+  validateCvv()
   console.log('Card Number:', cardNumber.value);
   console.log('Month:', month.value);
   console.log('Year:', year.value);
   console.log('CVV:', cvv.value);
+  console.log('check:', check.value);
 }
 
 const updateCardNumber = (event) => {
@@ -29,24 +35,24 @@ const updateCardNumber = (event) => {
 const validateCardNumber = () => {
   isCardNumberInvalid.value = cardNumber.value.replace(/x/g, '').length !== 16;
 };
-const validateMonth = (value) => {
-  if (value < 1 || value > 12 || value?.length !== 2) {
+const validateMonth = () => {
+  if (month.value < 1 || month.value > 12 || month.value?.length !== 2) {
     isMonthInvalid.value = true;
   } else {
     isMonthInvalid.value = false;
   }
 };
 
-const validateYear = (value) => {
-  if (value < 24 || value?.length !== 2) {
+const validateYear = () => {
+  if (year.value < 24 || year.value?.length !== 2) {
     isYearInvalid.value = true;
   } else {
     isYearInvalid.value = false;
   }
 };
 
-const validateCvv = (value) => {
-  if (value?.length !== 3) {
+const validateCvv = () => {
+  if (cvv.value?.length !== 3) {
     isCvvInvalid.value = true;
   } else {
     isCvvInvalid.value = false;
@@ -214,7 +220,7 @@ onMounted(() => {
         </div>
       </div>
       <label>
-        <input type="checkbox" />
+        <input type="checkbox" v-model="check" />
         Guarantee of fast return of funds
       </label>
       <a href="https://platon.ua/policy.pdf" target="_blank">(public policy)</a>
@@ -360,6 +366,16 @@ onMounted(() => {
 }
 .warning__text {
   font-size: 12px;
+}
+@media only screen and (min-width: 550px) {
+  .payment-form__form {
+    width: 100%;
+    max-width: 596px;
+  }
+  .payment-form__row {
+    justify-content: space-between;
+    flex-wrap: nowrap;
+  }
 }
 @media only screen and (min-width: 950px) {
   .payment-form__form {

@@ -25,6 +25,7 @@ import PaymentCards from "@/components/PaymentCards.vue";
 @media only screen and (min-width: 950px) {
   .payment-details {
     width: 360px;
+    margin: 5px 0 5px -20px;
   }
 }
 </style>

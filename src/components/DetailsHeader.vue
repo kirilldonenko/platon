@@ -5,7 +5,7 @@ import LangsSwitcher from "@/components/LangsSwitcher.vue";
 
 <template>
 <div class="details-header">
-  <LangsSwitcher />
+  <LangsSwitcher class="details-header__switcher" />
   <img :src="Logo" width="180" height="auto">
 </div>
 </template>
@@ -23,6 +23,17 @@ import LangsSwitcher from "@/components/LangsSwitcher.vue";
   .details-header {
     border-bottom: none;
     padding: 35px 25px 0 38px;
+  }
+}
+@media only screen and (min-width: 950px) {
+  .details-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 22px;
+    border-bottom: 1px solid #e5e5e5;
+  }
+  .details-header__switcher {
+    align-self: end;
   }
 }
 </style>

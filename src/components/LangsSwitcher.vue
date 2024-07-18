@@ -43,4 +43,9 @@ import UA from '@/assets/images/ua.svg'
     flex-direction: row;
   }
 }
+@media only screen and (min-width: 950px) {
+  .lang-switcher__lang {
+    margin-right: 10px;
+  }
+}
 </style>
