@@ -5,8 +5,8 @@ import UA from '@/assets/images/ua.svg'
 
 <template>
 <div class="lang-switcher">
-  <img class="lang-switcher__lang lang-switcher__lang--in-active" :src="UA" alt="UA"/>
-  <img class="lang-switcher__lang" :src="EN" alt="EN" />
+  <img class="lang-switcher__lang" :src="UA" alt="UA"/>
+  <img class="lang-switcher__lang lang-switcher__lang--active" :src="EN" alt="EN" />
 </div>
 </template>
 
@@ -21,22 +21,24 @@ import UA from '@/assets/images/ua.svg'
 .lang-switcher__lang {
   margin-right: 30px;
 }
-@media only screen and (max-width: 768px) {
-  .lang-switcher {
-    flex-direction: row;
-  }
-  .lang-switcher:after {
-    content: '';
-    background: url('../assets/images/arrow.svg') no-repeat right center;
-    position: absolute;
-    width: 24px;
-    height: 12px;
-    right: 0;
-    top: 7px;
-  }
-  .lang-switcher__lang--in-active {
-    display: none;
-  }
+.lang-switcher__lang:hover, .lang-switcher__lang--active {
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 3px #e66000;
+}
+.lang-switcher:after {
+  content: '';
+  background: url('../assets/images/arrow.svg') no-repeat right center;
+  position: absolute;
+  width: 24px;
+  height: 12px;
+  right: 0;
+  top: 7px;
+}
+.lang-switcher__lang {
+  display: none;
+}
+.lang-switcher__lang--active {
+  display: block;
 }
 @media only screen and (min-width: 768px) {
   .lang-switcher {
@@ -44,8 +46,17 @@ import UA from '@/assets/images/ua.svg'
   }
 }
 @media only screen and (min-width: 950px) {
+  .lang-switcher {
+    flex-direction: row;
+  }
   .lang-switcher__lang {
     margin-right: 10px;
+  }
+  .lang-switcher__lang {
+    display: block;
+  }
+  .lang-switcher:after {
+    display: none;
   }
 }
 </style>

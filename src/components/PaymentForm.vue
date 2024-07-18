@@ -265,10 +265,10 @@ onMounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 20px;
 }
 .payment-form__row-multi .payment-form__item {
   max-width: 48%;
-  margin-bottom: 20px;
 }
 .payment-form__row-last {
   width: 100%;
@@ -375,6 +375,14 @@ onMounted(() => {
   .payment-form__row {
     justify-content: space-between;
     flex-wrap: nowrap;
+  }
+  .payment-form__row-last {
+    width: 50%;
+    margin-left: 20px;
+    margin-bottom: 20px;
+  }
+  .payment-form__row-multi {
+    width: 50%;
   }
 }
 @media only screen and (min-width: 950px) {
