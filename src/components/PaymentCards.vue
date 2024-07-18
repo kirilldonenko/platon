@@ -91,8 +91,13 @@ import PCI from '@/assets/images/pci.png'
   outline: none;
 }
 .payment-cards__row--inactive {
+  display: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
+.payment-cards__row:nth-child(2) {
+  display: flex;
+}
+
 .payment-cards__row--active .payment-cards__card {
   max-width: 33%;
 }
@@ -114,7 +119,7 @@ import PCI from '@/assets/images/pci.png'
   align-items: center;
   justify-content: center;
   height: 60px;
-  background-color: #f5f5f5;
+  background-color: #ffffff;
   transition: 0.2s ease;
   cursor: pointer;
   width: 50%;
@@ -141,7 +146,7 @@ import PCI from '@/assets/images/pci.png'
 .payment-cards__card::before {
   content: '';
   position: absolute;
-  left: 16px;
+  left: 0;
   top: 50%;
   margin-top: -7px;
   height: 14px;
@@ -161,6 +166,9 @@ import PCI from '@/assets/images/pci.png'
 @media only screen and (min-width: 948px) {
   .payment-cards__block {
     width: 100%;
+  }
+  .payment-cards__row--inactive {
+    display: flex;
   }
   .payment-cards__card {
     background-color: #ffffff;

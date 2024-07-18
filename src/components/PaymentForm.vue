@@ -2,6 +2,8 @@
 import { nextTick, onMounted, ref, watch } from 'vue';
 import Warning from '@/assets/images/warning.svg'
 import Inputmask from 'inputmask';
+import OrderDetails from "@/components/OrderDetails.vue";
+import FormFooter from "@/components/FormFooter.vue";
 
 const cardNumber = ref('');
 const month = ref('');
@@ -228,6 +230,10 @@ onMounted(() => {
         <button class="payment-form__button" type="submit" @click.prevent="submit">PAY</button>
       </div>
     </form>
+    <div class="payment-form__footer">
+      <OrderDetails />
+      <FormFooter />
+    </div>
   </div>
 </template>
 
@@ -290,16 +296,12 @@ onMounted(() => {
   box-sizing: border-box;
 }
 .warning {
-  position: absolute;
-  top: 3px;
-  left: 0;
-  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   padding: 8px 15px 12px;
   margin-bottom: 15px;
-  width: 100%;
+  width: 91%;
   background-color: #fef2f3;
   line-height: 1;
 }
